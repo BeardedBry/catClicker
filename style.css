@@ -1,0 +1,40 @@
+#wrapper {
+  display: flex;
+}
+
+.catImage{
+  width: 15rem;
+}
+
+.cat h2{
+}
+.cat{
+  text-align: center;
+}
+
+.hiddenCat{
+  display: none;
+}
+
+
+#hero {
+  padding-top: 1rem;
+  padding-left: 4rem;
+}
+
+#catList {
+  background: #e6ffff;
+  padding-top: 2rem;
+  padding-right: 1rem;
+  width: 30%;
+  text-align: right;
+}
+
+ul {
+  list-style: none;
+}
+
+li{
+  display: inline;
+  color: #009999;
+}
