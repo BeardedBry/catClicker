@@ -23,10 +23,11 @@
 }
 
 #catList {
+  display: block;
   background: #e6ffff;
   padding-top: 2rem;
   padding-right: 1rem;
-  width: 30%;
+  width: 15%;
   text-align: right;
 }
 
@@ -36,5 +37,14 @@ ul {
 
 li{
   display: inline;
-  color: #009999;
+  color: slategray;
+}
+
+#admin {
+  width: 15%;
+}
+
+form {
+  display: block;
+  width: 60%;
 }

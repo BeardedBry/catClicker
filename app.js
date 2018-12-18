@@ -4,8 +4,9 @@
   const hero = document.querySelector('#hero');
   const catArea = document.querySelector('.cat');
   const catImage = document.querySelector('.catImage')
+  //const admin = document.querySelector('#adminMenu');
 
-/* ====== Model ===== */
+/* ====== MODEL ===== */
 
   const model = {
      Henry: {
@@ -32,11 +33,11 @@
       name: 'Tiger',
       url: 'https://s.yimg.com/uu/api/res/1.2/9fi1nf4iWS6bfdyCyXmbBg--~B/aD0zMzk7dz01MDk7c209MTthcHBpZD15dGFjaHlvbg--/http://media.zenfs.com/en-GB/homerun/newsweek_europe_news_328/296a853a5f736de51ee472ca1543153c',
       counter: 0
-       }
-    }
+    },
+  }
   
 
-/* ====== Octopus ====== */
+/* ====== OCTOPUS ====== */
 
   const octopus = {
     
@@ -47,28 +48,41 @@
     showCat: function(cat){
       //console.log(e)
       catView.render(cat)
+      adminView.render();
     },
     
     init: function(){
       catView.init();
-      catView.render(model['Henry']);
+      catView.render(Object.entries(model)[0][1]); // Renders first object in the model.
       listView.init();
+      adminView.render();
     },
     
-    incrementCounter: function(cat){
+    incrementCounter: function(cat){ // When image is clicked 
       model[cat].counter++;
-      catView.render(model[cat])
+      octopus.showCat(model[cat]); 
+      /* Calls the showCat function that renders everything.
+         Could be modified to only update the counter by writing new
+         view functions that seperate these concerns.
+      */
     },
+
+    
+    active: {
+      name: '',
+      url: '',
+      counter: 0
+  },
 
   }
 
-  /* ====== VIEW ====== */
+  /* ====== VIEWS ====== */
 
 
   const catView = {
     
     init: function(){ 
-        catImage.addEventListener('click', function(e){
+        catImage.addEventListener('click', function(e){ // Event liustener for when image is clicked.
             let targetObj = e.target.alt;  // If it works it works.
             octopus.incrementCounter(targetObj);
         });
@@ -77,8 +91,9 @@
     render: function(cat){
       catArea.children[0].innerHTML = cat.name;
       catArea.children[1].src = cat.url; // Fragile way to select elements.
-      catArea.children[1].alt = cat.name;
+      catArea.children[1].alt = cat.name; // Important for my image clicking event listener.
       catArea.children[2].innerHTML = `Counter: ${cat.counter}`;
+      Object.assign(octopus.active, cat); // Assigns current cat to Octopus.active
     }
   }
   
@@ -94,8 +109,21 @@
        }
       )}
   }
-  
+
+  const adminView = {
+    render: function(){
+      adminMenu.name.value = octopus.active.name;
+      adminMenu.url.value = octopus.active.url;
+      adminMenu.clicks.value = octopus.active.counter;
+    },
+  }
+
     octopus.init();
+
+
+
+
+
 
     /*
     Visuals
