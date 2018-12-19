@@ -37,9 +37,7 @@
     }],
   }
   
-
 /* ====== OCTOPUS ====== */
-
   const octopus = {
     
     getCats: function(){
@@ -55,14 +53,15 @@
     
     init: function(){
       catView.init();
-      catView.render(model.cats[0]); // Renders first object in the model.
+      octopus.showCat(model.cats[0]);
+      //catView.render(octopus.active); // Renders first object in the model.
       listView.init();
       adminView.render();
       adminView.init();
     },
     
     incrementCounter: function(cat){ // When image is clicked 
-      console.log(cat);
+      //console.log(cat);
       octopus.active.counter++;
       octopus.showCat(octopus.active);
       octopus.active.update(cat);
@@ -78,16 +77,26 @@
       counter: 0,
       
       update: function(cat){ // Updates the model.
-        model.cats[cat].name = this.name;
-        model.cats[cat].counter = this.counter;
-        model.cats[cat].url = this.url;
+        let currentCat = model.cats.findIndex(function(n){  // Finds the index in the model for selected cat.
+          return n.name == cat.name;
+        })
+        //console.log(cat);
+        //console.log(currentCat);
+        model.cats[currentCat].name = this.name;
+        model.cats[currentCat].counter = this.counter;
+        model.cats[currentCat].url = this.url;
       },
 
       adminUpdate: function(){
-        let newName = document.querySelector('.name').value;
-        model.cats[this.name].name = newName;
-        model.cats[this.name].alt = newName;
-        octopus.showCat(model.cats[this.name]);
+        let currentCat = model.cats.findIndex(function(n){  // Finds the index in the model for selected cat.
+          return n.name == octopus.active.name;
+        })
+        //let newName = document.querySelector('.name').value;
+        model.cats[currentCat].name = adminMenu.name.value
+        model.cats[currentCat].alt = adminMenu.name.value
+        model.cats[currentCat].url = adminMenu.url.value;
+        model.cats[currentCat].counter = adminMenu.clicks.value;
+        octopus.showCat(model.cats[currentCat]);
         listView.init();
       }
     },
@@ -95,14 +104,13 @@
   }
 
   /* ====== VIEWS ====== */
-
-
   const catView = {
     
     init: function(){ 
         catImage.addEventListener('click', (function(e){ // Event liustener for when image is clicked.
             return function(e){
-              let Obj = e.target.alt;  // If it works it works.
+              //let Obj = e.target.alt;  // If it works it works.
+              let Obj = octopus.active;
               // console.log(e.target);
             octopus.incrementCounter(Obj);
           };
