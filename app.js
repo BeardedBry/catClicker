@@ -4,7 +4,8 @@
   const hero = document.querySelector('#hero');
   const catArea = document.querySelector('.cat');
   const catImage = document.querySelector('.catImage')
-  //const admin = document.querySelector('#adminMenu');
+  const adminButton = document.querySelector('#adminButton');
+  const adminToggle = document.querySelector('#adminToggle');
 
 /* ====== MODEL ===== */
 
@@ -91,7 +92,6 @@
         let currentCat = model.cats.findIndex(function(n){  // Finds the index in the model for selected cat.
           return n.name == octopus.active.name;
         })
-        //let newName = document.querySelector('.name').value;
         model.cats[currentCat].name = adminMenu.name.value
         model.cats[currentCat].alt = adminMenu.name.value
         model.cats[currentCat].url = adminMenu.url.value;
@@ -149,6 +149,15 @@
   const adminView = {
 
     init: function(){
+
+      adminButton.addEventListener('click', function(){
+        adminToggle.classList.toggle('hide');
+      });
+
+      adminMenu.cancel.addEventListener('click', function(){
+        adminView.render();
+      });
+
       adminMenu.save.addEventListener('click', (function(e){
         return function(e){
           e.preventDefault();

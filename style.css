@@ -44,6 +44,10 @@ li{
   width: 15%;
 }
 
+.hide {
+  display: none;
+}
+
 form {
   display: block;
   width: 60%;

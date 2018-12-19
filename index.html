@@ -9,7 +9,8 @@
 <body>
  <div id = 'wrapper'>
     <div id = 'admin'>
-        <button>Admin Mode</button>
+        <button id='adminButton'>Admin Mode</button>
+        <div id = 'adminToggle' class ='hide'>
         <form id = 'adminMenu'>
           Name: <input type="text" name="name" class='name'>
           imgURL: <input type="text" name="url" class='url'>
@@ -17,6 +18,7 @@
           <input type="button" value="Save" name="save">
           <input type="button" value="Cancel" name="cancel">
         </form>
+      </div>
       </div>
    <div id = 'catList'>
      <ul>
